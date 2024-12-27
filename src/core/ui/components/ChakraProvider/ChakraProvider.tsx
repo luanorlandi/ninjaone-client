@@ -21,12 +21,13 @@ const customConfig = defineConfig({
     tokens: {
       colors: {
         blue: {
-          lightest: { value: "#6E6D7A" },
-          lighter: { value: "#595766" },
-          light: { value: "#E7E8EB" },
-          base: { value: "#337AB7" },
-          dark: { value: "#002A42" },
-          darker: { value: "#211F33" },
+          100: { value: "#6E6D7A" },
+          200: { value: "#595766" },
+          300: { value: "#E7E8EB" },
+          400: { value: "#337AB7" },
+          500: { value: "#2e6ea5" },
+          600: { value: "#002A42" },
+          900: { value: "#211F33" },
         },
         red: {
           base: { value: "#D53948" },
