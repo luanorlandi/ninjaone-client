@@ -15,6 +15,7 @@ const customConfig = defineConfig({
       margin: 0,
       padding: 0,
       backgroundColor: "white",
+      color: "{colors.blue.900}",
     },
   },
   theme: {
@@ -44,12 +45,12 @@ const customConfig = defineConfig({
 
 const system = createSystem(defaultConfig, customConfig);
 
-export function Provider(props: ThemeProviderProps) {
+export const Provider = (props: ThemeProviderProps) => {
   return (
     <ChakraProvider value={system}>
       <ThemeProvider attribute="class" disableTransitionOnChange {...props} />
     </ChakraProvider>
   );
-}
+};
 
 export default system;

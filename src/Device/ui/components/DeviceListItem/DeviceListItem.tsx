@@ -56,12 +56,7 @@ export const DeviceListItem = ({
     >
       <HStack>
         <Box>
-          <Box
-            gap={1}
-            display="flex"
-            alignItems="center"
-            color="{colors.blue.900}"
-          >
+          <Box gap={1} display="flex" alignItems="center">
             {getLogo(device.type)}
             {device.system_name}
           </Box>
@@ -71,7 +66,7 @@ export const DeviceListItem = ({
               <Text as="span" textTransform="lowercase">
                 workstation
               </Text>{" "}
-              - {device.hdd_capacity}
+              - {device.hdd_capacity} GB
             </Text>
           </Box>
         </Box>

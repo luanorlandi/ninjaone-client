@@ -1,3 +1,4 @@
+import * as React from "react";
 import type { ButtonProps as ChakraButtonProps } from "@chakra-ui/react";
 import {
   defineRecipe,
@@ -7,7 +8,6 @@ import {
   Span,
   Spinner,
 } from "@chakra-ui/react";
-import * as React from "react";
 
 export const buttonRecipe = defineRecipe({
   base: {
@@ -16,26 +16,50 @@ export const buttonRecipe = defineRecipe({
   variants: {
     visual: {
       solid: {
-        backgroundColor: {
-          base: "{colors.blue.400}",
-          _hover: "{colors.blue.500}",
-        },
+        backgroundColor: "{colors.blue.400}",
+        borderColor: "{colors.blue.400}",
         color: "white",
-        outlineColor: {
-          _focusVisible: "{colors.blue.500}",
+        _hover: {
+          backgroundColor: "{colors.blue.500}",
+        },
+        _focusVisible: {
+          outlineColor: "{colors.blue.500}",
+        },
+        _expanded: {
+          backgroundColor: "{colors.blue.500}",
         },
       },
-      outline: { borderWidth: "1px", borderColor: "{colors.blue.400}" },
+      outline: {
+        borderWidth: "1px",
+        borderColor: "#48446940",
+        backgroundColor: "transparent",
+        color: "{colors.blue.400}",
+        _hover: {
+          backgroundColor: "#E6E6E6",
+        },
+        _focusVisible: {
+          outlineColor: "#48446940",
+        },
+      },
       ghost: {
         backgroundColor: "transparent",
         _hover: {
-          backgroundColor: "#E8E8EA",
+          backgroundColor: "#E6E6E6",
         },
-        outlineColor: {
-          _focusVisible: "{colors.blue.100}",
+        _focusVisible: {
+          outlineColor: "{colors.blue.100}",
         },
         _expanded: {
-          backgroundColor: "#E8E8EA",
+          backgroundColor: "#E6E6E6",
+        },
+      },
+      plain: {
+        backgroundColor: "transparent",
+        _hover: {
+          backgroundColor: "#E6E6E6",
+        },
+        _focusVisible: {
+          outlineColor: "{colors.blue.100}",
         },
       },
     },

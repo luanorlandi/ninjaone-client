@@ -1,5 +1,6 @@
-export { Button } from "./Button/Button";
 export { NavBar } from "./NavBar/NavBar";
+export { Button } from "./Button/Button";
+export { Field } from "./Field/Field";
 export {
   IconNinjaOne,
   IconPlusSign,
@@ -7,6 +8,7 @@ export {
   IconWindows,
   IconApple,
   IconMenu,
+  IconClose,
 } from "./Icons";
 
 export {
@@ -23,5 +25,30 @@ export {
   MenuItem,
   MenuItemText,
   MenuTrigger,
-} from "./Menu";
-export type { MenuTriggerItemProps } from "./Menu";
+} from "./Menu/Menu";
+export type { MenuTriggerItemProps } from "./Menu/Menu";
+
+export {
+  DialogContent,
+  DialogCloseTrigger,
+  DialogRoot,
+  DialogFooter,
+  DialogHeader,
+  DialogBody,
+  DialogBackdrop,
+  DialogTitle,
+  DialogDescription,
+  DialogTrigger,
+  DialogActionTrigger,
+} from "./Dialog/Dialog";
+
+export {
+  SelectTrigger,
+  SelectContent,
+  SelectItem,
+  SelectValueText,
+  SelectRoot,
+  SelectItemGroup,
+  SelectLabel,
+  SelectItemText,
+} from "./Select/Select";
