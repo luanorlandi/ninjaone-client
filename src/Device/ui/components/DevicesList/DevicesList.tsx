@@ -1,13 +1,26 @@
-import { Box, Text } from "@chakra-ui/react";
+import { useState } from "react";
+import { Box, Text, useDisclosure } from "@chakra-ui/react";
 
 import { DeviceListItem } from "@/Device/ui/components";
 import type { Device } from "@/Device/domain";
+import { DeviceDeleteDialog } from "@/Device/ui/components/DeviceDeleteDialog";
 
 type DevicesListProps = {
   devices: Device[];
 };
 
+const EMPTY_DEVICE: Device = {
+  id: "",
+  system_name: "",
+  type: "WINDOWS",
+  hdd_capacity: "",
+};
+
 export const DevicesList = ({ devices }: DevicesListProps) => {
+  const [deviceSelected, setDeviceSelected] = useState<Device>(EMPTY_DEVICE);
+  const { open: isDeleteDialogOpen, onToggle: toggleDeleteDialog } =
+    useDisclosure();
+
   return (
     <Box>
       <Text fontWeight="medium" px={3} py={2}>
@@ -21,10 +34,16 @@ export const DevicesList = ({ devices }: DevicesListProps) => {
             console.log("Edit device");
           }}
           onDelete={() => {
-            console.log("Delete device");
+            setDeviceSelected(device);
+            toggleDeleteDialog();
           }}
         />
       ))}
+      <DeviceDeleteDialog
+        isOpen={isDeleteDialogOpen}
+        onToggle={toggleDeleteDialog}
+        device={deviceSelected}
+      />
     </Box>
   );
 };

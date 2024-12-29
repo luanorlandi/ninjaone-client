@@ -32,12 +32,16 @@ const devices = createListCollection<{ label: string; value: DeviceType }>({
   ],
 });
 
-export const DeviceAddDialog = () => {
-  const { open, onClose, onToggle } = useDisclosure();
+type DeviceAddDialogProps = {
+  isOpen: boolean;
+  onToggle: () => void;
+};
+
+export const DeviceAddDialog = ({ isOpen, onToggle }: DeviceAddDialogProps) => {
   const { mutate, isPending } = useCreateDevice({
     onSuccess: () => {
       // TODO add toast feedback
-      onClose();
+      onToggle();
     },
     onError: () => {
       // TODO add toast feedback
@@ -55,18 +59,7 @@ export const DeviceAddDialog = () => {
   });
 
   return (
-    <DialogRoot
-      placement="center"
-      motionPreset="slide-in-bottom"
-      open={open}
-      onOpenChange={onToggle}
-    >
-      <DialogTrigger asChild>
-        <Button>
-          <IconPlusSign boxSize="14px" />
-          Add device
-        </Button>
-      </DialogTrigger>
+    <DialogRoot placement="center" open={isOpen} onOpenChange={onToggle}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>Add device</DialogTitle>

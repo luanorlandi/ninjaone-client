@@ -1,25 +1,26 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { toast } from "react-toastify";
+import { AxiosResponse } from "axios";
 
-import { deleteDevice } from "../../infra/DeviceRepository";
+import { api } from "@/core/infra";
+import type { Device } from "@/Device/domain";
 
-export const useDeleteDevice = () => {
+export const useDeleteDevice = (options?: {
+  onSuccess?: () => void;
+  onError?: () => void;
+}) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: (deviceID: string) => deleteDevice(deviceID),
+    mutationFn: async (id: string) => {
+      const data = await api.delete<AxiosResponse>(`/devices/${id}`);
+      return data?.data;
+    },
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["deviceList"] });
-      toast.success("Device deleted with success", {
-        hideProgressBar: true,
-        position: "top-right",
-      });
+      queryClient.invalidateQueries({ queryKey: ["list-device"] });
+      options?.onSuccess?.();
     },
     onError: () => {
-      toast.error("Failed to delete the device", {
-        hideProgressBar: true,
-        position: "top-right",
-      });
+      options?.onError?.();
     },
   });
 };

@@ -62,6 +62,17 @@ export const buttonRecipe = defineRecipe({
           outlineColor: "{colors.blue.100}",
         },
       },
+      danger: {
+        backgroundColor: "{colors.danger}",
+        borderColor: "{colors.danger}",
+        color: "white",
+        _hover: {
+          backgroundColor: "{colors.red.500}",
+        },
+        _focusVisible: {
+          outlineColor: "{colors.red.500}",
+        },
+      },
     },
     size: {
       md: { padding: 3, fontSize: "14px", fontWeight: "medium" },
@@ -79,7 +90,14 @@ interface ButtonLoadingProps {
 }
 
 export interface ButtonProps extends ChakraButtonProps, ButtonLoadingProps {
-  visual?: "solid" | "subtle" | "surface" | "outline" | "ghost" | "plain";
+  visual?:
+    | "solid"
+    | "subtle"
+    | "surface"
+    | "outline"
+    | "ghost"
+    | "plain"
+    | "danger";
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(

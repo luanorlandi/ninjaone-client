@@ -31,13 +31,14 @@ const customConfig = defineConfig({
           900: { value: "#211F33" },
         },
         red: {
-          base: { value: "#D53948" },
+          400: { value: "#D53948" },
+          500: { value: "#C82B3A" },
         },
       },
     },
     semanticTokens: {
       colors: {
-        danger: { value: "{colors.red.base}" },
+        danger: { value: "{colors.red.400}" },
       },
     },
   },
