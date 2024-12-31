@@ -4,15 +4,23 @@ import { AxiosResponse } from "axios";
 import { api } from "@/core/infra";
 import type { NewDevice, Device } from "@/Device/domain";
 
-export const useCreateDevice = (options?: {
+export const useEditDevice = (options?: {
   onSuccess?: () => void;
   onError?: () => void;
 }) => {
   const queryClient = useQueryClient();
 
   return useMutation({
-    mutationFn: async (device: NewDevice) => {
-      const data = await api.post<AxiosResponse<Device>>("/devices", device);
+    mutationFn: async (device: Device) => {
+      const deviceWithoutId = {
+        system_name: device.system_name,
+        type: device.type,
+        hdd_capacity: device.hdd_capacity,
+      };
+      const data = await api.put<AxiosResponse<Device>>(
+        `/devices/${device.id}`,
+        deviceWithoutId
+      );
       return data?.data;
     },
     onSuccess: () => {

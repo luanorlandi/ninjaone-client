@@ -1,1 +1,1 @@
-export { useListDevice, useCreateDevice } from "./hooks";
+export { useListDevice, useCreateDevice, useEditDevice } from "./hooks";

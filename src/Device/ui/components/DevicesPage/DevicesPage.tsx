@@ -1,14 +1,15 @@
 import { Box, Heading, HStack, Spacer, useDisclosure } from "@chakra-ui/react";
 
 import { NavBar, Button, IconPlusSign } from "@/shared/ui/components";
+import { DevicesList, DeviceAddDialog } from "@/Device/ui/components";
 import { useListDevice } from "@/Device/infra";
-import { DeviceAddDialog, DevicesList } from "@/Device/ui/components";
 
 export const DevicesPage = () => {
-  const { data, isLoading } = useListDevice();
-  const { open: isAddDialogOpen, onToggle: toggleAddDialog } = useDisclosure();
+  const { data, isLoading: isLoadingDeviceList } = useListDevice();
+  const { open: isCreateDialogOpen, onToggle: toggleCreateDialog } =
+    useDisclosure();
 
-  if (isLoading) {
+  if (isLoadingDeviceList) {
     // TODO: add spinner or skeleton loading
     return <p>Loading...</p>;
   }
@@ -22,13 +23,16 @@ export const DevicesPage = () => {
             Devices
           </Heading>
           <Spacer />
-          <Button onClick={toggleAddDialog}>
+          <Button onClick={toggleCreateDialog}>
             <IconPlusSign boxSize="14px" />
             Add device
           </Button>
         </HStack>
         <DevicesList devices={data} />
-        <DeviceAddDialog isOpen={isAddDialogOpen} onToggle={toggleAddDialog} />
+        <DeviceAddDialog
+          isOpen={isCreateDialogOpen}
+          onToggle={toggleCreateDialog}
+        />
       </Box>
     </>
   );

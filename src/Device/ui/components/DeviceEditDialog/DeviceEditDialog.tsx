@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Input, createListCollection } from "@chakra-ui/react";
 import { useForm } from "@tanstack/react-form";
 
@@ -19,8 +20,8 @@ import {
   SelectContent,
   SelectItem,
 } from "@/shared/ui/components";
-import { NewDevice, DeviceType } from "@/Device/domain";
-import { useCreateDevice } from "@/Device/infra";
+import { NewDevice, Device, DeviceType } from "@/Device/domain";
+import { useEditDevice } from "@/Device/infra";
 
 const devices = createListCollection<{ label: string; value: DeviceType }>({
   items: [
@@ -30,13 +31,18 @@ const devices = createListCollection<{ label: string; value: DeviceType }>({
   ],
 });
 
-type DeviceAddDialogProps = {
+type DeviceEditDialogProps = {
   isOpen: boolean;
   onToggle: () => void;
+  device: Device;
 };
 
-export const DeviceAddDialog = ({ isOpen, onToggle }: DeviceAddDialogProps) => {
-  const { mutate, isPending } = useCreateDevice({
+export const DeviceEditDialog = ({
+  isOpen,
+  onToggle,
+  device,
+}: DeviceEditDialogProps) => {
+  const { mutate, isPending } = useEditDevice({
     onSuccess: () => {
       // TODO add toast feedback
       onToggle();
@@ -52,9 +58,20 @@ export const DeviceAddDialog = ({ isOpen, onToggle }: DeviceAddDialogProps) => {
       hdd_capacity: "",
     },
     onSubmit: ({ value }) => {
-      mutate(value);
+      mutate({
+        id: device.id,
+        ...value,
+      });
     },
   });
+
+  useEffect(() => {
+    if (isOpen) {
+      form.setFieldValue("system_name", device.system_name);
+      form.setFieldValue("type", device.type);
+      form.setFieldValue("hdd_capacity", device.hdd_capacity);
+    }
+  }, [isOpen]);
 
   return (
     <DialogRoot
@@ -65,7 +82,7 @@ export const DeviceAddDialog = ({ isOpen, onToggle }: DeviceAddDialogProps) => {
     >
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Add device</DialogTitle>
+          <DialogTitle>Edit device</DialogTitle>
         </DialogHeader>
         <form
           onSubmit={(event) => {
