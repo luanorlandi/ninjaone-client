@@ -5,3 +5,4 @@ export { IconWindows } from "./IconWindows";
 export { IconApple } from "./IconApple";
 export { IconMenu } from "./IconMenu";
 export { IconClose } from "./IconClose";
+export { IconRefresh } from "./IconRefresh";

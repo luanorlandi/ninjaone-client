@@ -1,18 +1,32 @@
-import { Box, Heading, HStack, Spacer, useDisclosure } from "@chakra-ui/react";
+import {
+  Box,
+  Heading,
+  HStack,
+  Spacer,
+  Center,
+  Spinner,
+  useDisclosure,
+} from "@chakra-ui/react";
 
-import { NavBar, Button, IconPlusSign } from "@/shared/ui/components";
+import {
+  NavBar,
+  Button,
+  IconPlusSign,
+  IconRefresh,
+  ToggleTip,
+} from "@/shared/ui/components";
 import { DevicesList, DeviceAddDialog } from "@/Device/ui/components";
 import { useListDevice } from "@/Device/infra";
 
 export const DevicesPage = () => {
-  const { data, isLoading: isLoadingDeviceList } = useListDevice();
+  const {
+    data,
+    isLoading: isLoadingDeviceList,
+    isError,
+    refetch,
+  } = useListDevice();
   const { open: isCreateDialogOpen, onToggle: toggleCreateDialog } =
     useDisclosure();
-
-  if (isLoadingDeviceList) {
-    // TODO: add spinner or skeleton loading
-    return <p>Loading...</p>;
-  }
 
   return (
     <>
@@ -28,7 +42,25 @@ export const DevicesPage = () => {
             Add device
           </Button>
         </HStack>
-        <DevicesList devices={data} />
+        <HStack>
+          {/* TODO add filters */}
+          <ToggleTip content="Results refreshed!">
+            <Button visual="ghost" onClick={() => refetch()}>
+              <IconRefresh boxSize="14px" />
+            </Button>
+          </ToggleTip>
+        </HStack>
+        {isLoadingDeviceList && !isError && (
+          <Center>
+            <Spinner color="{colors.blue.400}" size="xl" />
+          </Center>
+        )}
+        {!isLoadingDeviceList && isError && (
+          <Center py={4}>
+            <Box>Something went wrong to load the devices</Box>
+          </Center>
+        )}
+        {!isLoadingDeviceList && !isError && <DevicesList devices={data} />}
         <DeviceAddDialog
           isOpen={isCreateDialogOpen}
           onToggle={toggleCreateDialog}

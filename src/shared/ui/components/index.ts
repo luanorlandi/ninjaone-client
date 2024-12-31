@@ -9,6 +9,7 @@ export {
   IconApple,
   IconMenu,
   IconClose,
+  IconRefresh,
 } from "./Icons";
 
 export {
@@ -54,3 +55,4 @@ export {
 } from "./Select/Select";
 
 export { toaster, Toaster } from "./Toaster/Toaster";
+export { ToggleTip } from "./ToggleTip/ToggleTip";
