@@ -52,3 +52,5 @@ export {
   SelectLabel,
   SelectItemText,
 } from "./Select/Select";
+
+export { toaster, Toaster } from "./Toaster/Toaster";

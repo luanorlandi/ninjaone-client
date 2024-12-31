@@ -1,5 +1,4 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { AxiosResponse } from "axios";
 
 import { api } from "@/core/infra";
 import type { NewDevice, Device } from "@/Device/domain";
@@ -12,7 +11,7 @@ export const useCreateDevice = (options?: {
 
   return useMutation({
     mutationFn: async (device: NewDevice) => {
-      const data = await api.post<AxiosResponse<Device>>("/devices", device);
+      const data = await api.post<Device>("/devices", device);
       return data?.data;
     },
     onSuccess: () => {

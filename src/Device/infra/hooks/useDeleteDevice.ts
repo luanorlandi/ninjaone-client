@@ -1,8 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { AxiosResponse } from "axios";
 
 import { api } from "@/core/infra";
-import type { Device } from "@/Device/domain";
 
 export const useDeleteDevice = (options?: {
   onSuccess?: () => void;
@@ -12,7 +10,10 @@ export const useDeleteDevice = (options?: {
 
   return useMutation({
     mutationFn: async (id: string) => {
-      const data = await api.delete<AxiosResponse>(`/devices/${id}`);
+      const data = await api.delete<number>(`/devices/${id}`);
+      if (data?.data === 0) {
+        throw Error(`Failed to delete device id ${id}`);
+      }
       return data?.data;
     },
     onSuccess: () => {

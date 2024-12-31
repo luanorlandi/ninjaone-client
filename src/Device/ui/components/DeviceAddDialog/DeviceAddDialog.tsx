@@ -18,6 +18,7 @@ import {
   SelectValueText,
   SelectContent,
   SelectItem,
+  toaster,
 } from "@/shared/ui/components";
 import { NewDevice, DeviceType } from "@/Device/domain";
 import { useCreateDevice } from "@/Device/infra";
@@ -38,11 +39,17 @@ type DeviceAddDialogProps = {
 export const DeviceAddDialog = ({ isOpen, onToggle }: DeviceAddDialogProps) => {
   const { mutate, isPending } = useCreateDevice({
     onSuccess: () => {
-      // TODO add toast feedback
+      toaster.success({
+        title: `Device "${form.getFieldValue("system_name")}" created`,
+      });
       onToggle();
     },
     onError: () => {
-      // TODO add toast feedback
+      toaster.error({
+        title: `Failed to create device "${form.getFieldValue(
+          "system_name"
+        )}". Try again later`,
+      });
     },
   });
   const form = useForm<NewDevice>({

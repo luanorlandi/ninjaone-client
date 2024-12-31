@@ -19,6 +19,7 @@ import {
   SelectValueText,
   SelectContent,
   SelectItem,
+  toaster,
 } from "@/shared/ui/components";
 import { NewDevice, Device, DeviceType } from "@/Device/domain";
 import { useEditDevice } from "@/Device/infra";
@@ -44,11 +45,13 @@ export const DeviceEditDialog = ({
 }: DeviceEditDialogProps) => {
   const { mutate, isPending } = useEditDevice({
     onSuccess: () => {
-      // TODO add toast feedback
+      toaster.success({ title: `Device "${device.system_name}" edited` });
       onToggle();
     },
     onError: () => {
-      // TODO add toast feedback
+      toaster.error({
+        title: `Failed to edit device "${device.system_name}". Try again later`,
+      });
     },
   });
   const form = useForm<NewDevice>({

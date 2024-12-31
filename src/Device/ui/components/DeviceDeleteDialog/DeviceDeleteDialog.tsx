@@ -8,6 +8,7 @@ import {
   DialogFooter,
   DialogActionTrigger,
   DialogCloseTrigger,
+  toaster,
 } from "@/shared/ui/components";
 import { Device } from "@/Device/domain";
 import { useDeleteDevice } from "@/Device/infra/hooks";
@@ -23,13 +24,15 @@ export const DeviceDeleteDialog = ({
   onToggle,
   device,
 }: DeviceDeleteDialogProps) => {
-  const { mutate, isPending } = useDeleteDevice({
+  const { mutate, data, isPending } = useDeleteDevice({
     onSuccess: () => {
-      // TODO add toast
+      toaster.success({ title: `Device "${device.system_name}" deleted` });
       onToggle();
     },
     onError: () => {
-      // TODO add toast
+      toaster.error({
+        title: `Failed to delete device "${device.system_name}". Try again later`,
+      });
     },
   });
 

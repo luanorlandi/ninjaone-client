@@ -1,8 +1,7 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { AxiosResponse } from "axios";
 
 import { api } from "@/core/infra";
-import type { NewDevice, Device } from "@/Device/domain";
+import type { Device } from "@/Device/domain";
 
 export const useEditDevice = (options?: {
   onSuccess?: () => void;
@@ -17,10 +16,13 @@ export const useEditDevice = (options?: {
         type: device.type,
         hdd_capacity: device.hdd_capacity,
       };
-      const data = await api.put<AxiosResponse<Device>>(
+      const data = await api.put<number>(
         `/devices/${device.id}`,
         deviceWithoutId
       );
+      if (data?.data === 0) {
+        throw Error(`Failed to edit device id ${device.id}`);
+      }
       return data?.data;
     },
     onSuccess: () => {
