@@ -20,9 +20,10 @@ import {
   DevicesList,
   DeviceAddDialog,
   DeviceListFilters,
+  DeviceListSort,
 } from "@/Device/ui/components";
 import { useListDevice } from "@/Device/infra";
-import { Device, DeviceType } from "@/Device/domain";
+import { useDeviceListFilter, useDeviceSort } from "@/Device/ui/hooks";
 
 export const DevicesPage = () => {
   const {
@@ -31,30 +32,17 @@ export const DevicesPage = () => {
     isError,
     refetch,
   } = useListDevice();
-  const [devicesFiltered, setDevicesFiltered] = useState<
-    Device[] | undefined
-  >();
+  const {
+    systemName,
+    setSystemName,
+    deviceTypes,
+    setDeviceTypes,
+    devicesFiltered,
+  } = useDeviceListFilter(data);
+  const { sortValue, setSortValue, devicesSorted } =
+    useDeviceSort(devicesFiltered);
   const { open: isCreateDialogOpen, onToggle: toggleCreateDialog } =
     useDisclosure();
-
-  const handleFiltersChange = (filters: {
-    systemName: string;
-    deviceTypes: DeviceType[];
-  }) => {
-    const filteredDevices = data.filter((device) => {
-      const systemNameMatch = device.system_name
-        ? device.system_name
-            .toLowerCase()
-            .includes(filters.systemName.toLowerCase())
-        : false;
-      const deviceTypeMatch =
-        filters.deviceTypes.length > 0
-          ? filters.deviceTypes.includes(device.type)
-          : true;
-      return systemNameMatch && deviceTypeMatch;
-    });
-    setDevicesFiltered(filteredDevices);
-  };
 
   return (
     <>
@@ -71,7 +59,13 @@ export const DevicesPage = () => {
           </Button>
         </HStack>
         <HStack pb={2}>
-          <DeviceListFilters onChange={handleFiltersChange} />
+          <DeviceListFilters
+            systemName={systemName}
+            setSystemName={setSystemName}
+            deviceTypes={deviceTypes}
+            setDeviceTypes={setDeviceTypes}
+          />
+          <DeviceListSort sortValue={sortValue} setSortValue={setSortValue} />
           <Spacer />
           <ToggleTip content="Results refreshed!">
             <Button visual="ghost" onClick={() => refetch()}>
@@ -90,7 +84,7 @@ export const DevicesPage = () => {
           </Center>
         )}
         {!isLoadingDeviceList && !isError && (
-          <DevicesList devices={devicesFiltered ?? data} />
+          <DevicesList devices={devicesSorted} />
         )}
         <DeviceAddDialog
           isOpen={isCreateDialogOpen}

@@ -12,3 +12,12 @@ export type NewDevice = {
   type: DeviceType;
   hdd_capacity: string;
 };
+
+export type DeviceSortValue =
+  | undefined
+  | "system_name_ascending"
+  | "system_name_descending"
+  | "type_ascending"
+  | "type_descending"
+  | "hdd_capacity_ascending"
+  | "hdd_capacity_descending";

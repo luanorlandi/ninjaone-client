@@ -1,1 +1,1 @@
-export type { DeviceType, Device, NewDevice } from "./device";
+export type { DeviceType, Device, NewDevice, DeviceSortValue } from "./device";

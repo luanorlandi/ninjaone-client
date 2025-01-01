@@ -11,6 +11,7 @@ import {
   SelectItem,
 } from "@/shared/ui/components";
 import { DeviceType } from "@/Device/domain";
+import { useDebounce } from "@/shared/ui/hooks";
 
 const devicesCollection = createListCollection<{
   label: string;
@@ -24,30 +25,27 @@ const devicesCollection = createListCollection<{
 });
 
 type DeviceListFiltersProps = {
-  onChange: (filters: {
-    systemName: string;
-    deviceTypes: DeviceType[];
-  }) => void;
+  systemName: string;
+  setSystemName: (systemName: string) => void;
+  deviceTypes: DeviceType[];
+  setDeviceTypes: (deviceTypes: DeviceType[]) => void;
 };
 
-export const DeviceListFilters = ({ onChange }: DeviceListFiltersProps) => {
-  const [systemName, setSystemName] = useState("");
-  // TODO add debounce on systemName
-  const [deviceTypes, setDeviceTypes] = useState<DeviceType[]>([
-    "WINDOWS",
-    "LINUX",
-    "MAC",
-  ]);
+export const DeviceListFilters = ({
+  systemName,
+  setSystemName,
+  deviceTypes,
+  setDeviceTypes,
+}: DeviceListFiltersProps) => {
+  const setSystemNameDebounced = useDebounce({ func: setSystemName });
 
   return (
     <HStack>
       <InputGroup startElement={<IconSearch boxSize="16px" />}>
         <Input
           placeholder="Search"
-          value={systemName}
           onChange={(event) => {
-            setSystemName(event.target.value);
-            onChange({ systemName: event.target.value, deviceTypes });
+            setSystemNameDebounced(event.target.value);
           }}
           minWidth="270px"
         />
@@ -58,12 +56,11 @@ export const DeviceListFilters = ({ onChange }: DeviceListFiltersProps) => {
         value={deviceTypes}
         onValueChange={(values) => {
           setDeviceTypes(values.value as DeviceType[]);
-          onChange({ systemName, deviceTypes: values.value as DeviceType[] });
         }}
         minWidth="270px"
       >
         <SelectTrigger>
-          <SelectMultipleValueText placeholder="Device type"></SelectMultipleValueText>
+          <SelectMultipleValueText placeholder="Device type" />
         </SelectTrigger>
         <SelectContent>
           {devicesCollection.items.map((device) => (
