@@ -81,7 +81,7 @@ export const DeviceListSort = ({
   setSortValue,
 }: DeviceListSortProps) => {
   return (
-    <HStack>
+    <HStack width="100%" lg={{ width: "unset" }}>
       <SelectRoot
         collection={sortCollection}
         value={sortValue ? [sortValue] : []}

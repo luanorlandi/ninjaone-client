@@ -58,7 +58,12 @@ export const DevicesPage = () => {
             Add device
           </Button>
         </HStack>
-        <HStack pb={2}>
+        <HStack
+          pb={2}
+          flexDirection="column"
+          alignItems="flex-end"
+          lg={{ flexDirection: "row" }}
+        >
           <DeviceListFilters
             systemName={systemNameFilter}
             setSystemName={setSystemNameFilter}

@@ -40,8 +40,16 @@ export const DeviceListFilters = ({
   const setSystemNameDebounced = useDebounce({ func: setSystemName });
 
   return (
-    <HStack>
-      <InputGroup startElement={<IconSearch boxSize="16px" />}>
+    <HStack
+      flexDirection="column"
+      width="100%"
+      lg={{ flexDirection: "row", width: "unset" }}
+    >
+      <InputGroup
+        startElement={<IconSearch boxSize="16px" />}
+        width="100%"
+        lg={{ width: "unset" }}
+      >
         <Input
           placeholder="Search"
           onChange={(event) => {
