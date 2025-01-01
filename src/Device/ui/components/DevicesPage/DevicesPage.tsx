@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Box,
   Heading,
@@ -15,8 +16,13 @@ import {
   IconRefresh,
   ToggleTip,
 } from "@/shared/ui/components";
-import { DevicesList, DeviceAddDialog } from "@/Device/ui/components";
+import {
+  DevicesList,
+  DeviceAddDialog,
+  DeviceListFilters,
+} from "@/Device/ui/components";
 import { useListDevice } from "@/Device/infra";
+import { Device, DeviceType } from "@/Device/domain";
 
 export const DevicesPage = () => {
   const {
@@ -25,8 +31,30 @@ export const DevicesPage = () => {
     isError,
     refetch,
   } = useListDevice();
+  const [devicesFiltered, setDevicesFiltered] = useState<
+    Device[] | undefined
+  >();
   const { open: isCreateDialogOpen, onToggle: toggleCreateDialog } =
     useDisclosure();
+
+  const handleFiltersChange = (filters: {
+    systemName: string;
+    deviceTypes: DeviceType[];
+  }) => {
+    const filteredDevices = data.filter((device) => {
+      const systemNameMatch = device.system_name
+        ? device.system_name
+            .toLowerCase()
+            .includes(filters.systemName.toLowerCase())
+        : false;
+      const deviceTypeMatch =
+        filters.deviceTypes.length > 0
+          ? filters.deviceTypes.includes(device.type)
+          : true;
+      return systemNameMatch && deviceTypeMatch;
+    });
+    setDevicesFiltered(filteredDevices);
+  };
 
   return (
     <>
@@ -42,8 +70,9 @@ export const DevicesPage = () => {
             Add device
           </Button>
         </HStack>
-        <HStack>
-          {/* TODO add filters */}
+        <HStack pb={2}>
+          <DeviceListFilters onChange={handleFiltersChange} />
+          <Spacer />
           <ToggleTip content="Results refreshed!">
             <Button visual="ghost" onClick={() => refetch()}>
               <IconRefresh boxSize="14px" />
@@ -60,7 +89,9 @@ export const DevicesPage = () => {
             <Box>Something went wrong to load the devices</Box>
           </Center>
         )}
-        {!isLoadingDeviceList && !isError && <DevicesList devices={data} />}
+        {!isLoadingDeviceList && !isError && (
+          <DevicesList devices={devicesFiltered ?? data} />
+        )}
         <DeviceAddDialog
           isOpen={isCreateDialogOpen}
           onToggle={toggleCreateDialog}

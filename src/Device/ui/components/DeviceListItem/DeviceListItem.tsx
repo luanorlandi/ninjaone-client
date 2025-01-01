@@ -43,10 +43,6 @@ export const DeviceListItem = ({
       py={2}
       borderBottomWidth="1px"
       borderBottomColor="{colors.blue.300}"
-      _first={{
-        borderTopWidth: "1px",
-        borderTopColor: "#CBCFD3",
-      }}
       _hover={{
         backgroundColor: "#F4F4F5",
         "& [data-scope=menu]": {

@@ -2,14 +2,15 @@ export { NavBar } from "./NavBar/NavBar";
 export { Button } from "./Button/Button";
 export { Field } from "./Field/Field";
 export {
+  IconApple,
+  IconClose,
+  IconLinux,
+  IconMenu,
   IconNinjaOne,
   IconPlusSign,
-  IconLinux,
-  IconWindows,
-  IconApple,
-  IconMenu,
-  IconClose,
   IconRefresh,
+  IconSearch,
+  IconWindows,
 } from "./Icons";
 
 export {
@@ -48,6 +49,7 @@ export {
   SelectContent,
   SelectItem,
   SelectValueText,
+  SelectMultipleValueText,
   SelectRoot,
   SelectItemGroup,
   SelectLabel,
@@ -56,3 +58,4 @@ export {
 
 export { toaster, Toaster } from "./Toaster/Toaster";
 export { ToggleTip } from "./ToggleTip/ToggleTip";
+export { InputGroup } from "./InputGroup/InputGroup";

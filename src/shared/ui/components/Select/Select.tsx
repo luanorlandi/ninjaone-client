@@ -88,11 +88,51 @@ export const SelectValueText = React.forwardRef<
       <ChakraSelect.Context>
         {(select) => {
           const items = select.selectedItems;
-          if (items.length === 0) return props.placeholder;
-          if (children) return children(items);
-          if (items.length === 1)
+
+          if (items.length === 0) {
+            return props.placeholder;
+          }
+          if (children) {
+            return children(items);
+          }
+
+          if (items.length === 1) {
             return select.collection.stringifyItem(items[0]);
+          }
+
           return `${items.length} selected`;
+        }}
+      </ChakraSelect.Context>
+    </ChakraSelect.ValueText>
+  );
+});
+
+export const SelectMultipleValueText = React.forwardRef<
+  HTMLSpanElement,
+  SelectValueTextProps
+>(function SelectValueText(props, ref) {
+  const { children, ...rest } = props;
+  return (
+    <ChakraSelect.ValueText {...rest} ref={ref}>
+      <ChakraSelect.Context>
+        {(select) => {
+          const items = select.selectedItems;
+
+          if (items.length === 0) {
+            return `${props.placeholder}: All`;
+          }
+
+          if (children) {
+            return children(items);
+          }
+
+          if (items.length === select.collection.items.length) {
+            return `${props.placeholder}: All`;
+          }
+
+          return `${props.placeholder}: ${items
+            .map((item) => select.collection.stringifyItem(item))
+            .join(", ")}`;
         }}
       </ChakraSelect.Context>
     </ChakraSelect.ValueText>
