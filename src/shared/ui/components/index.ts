@@ -15,17 +15,7 @@ export {
   IconWindows,
 } from "./Icons";
 
-export {
-  MenuContent,
-  MenuArrow,
-  MenuItemGroup,
-  MenuContextTrigger,
-  MenuRoot,
-  MenuSeparator,
-  MenuItem,
-  MenuItemText,
-  MenuTrigger,
-} from "./Menu/Menu";
+export { MenuContent, MenuRoot, MenuItem, MenuTrigger } from "./Menu/Menu";
 
 export {
   DialogContent,
@@ -34,10 +24,7 @@ export {
   DialogFooter,
   DialogHeader,
   DialogBody,
-  DialogBackdrop,
   DialogTitle,
-  DialogDescription,
-  DialogTrigger,
   DialogActionTrigger,
 } from "./Dialog/Dialog";
 
@@ -50,7 +37,6 @@ export {
   SelectRoot,
   SelectItemGroup,
   SelectLabel,
-  SelectItemText,
 } from "./Select/Select";
 
 export { toaster, Toaster } from "./Toaster/Toaster";

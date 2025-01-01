@@ -112,7 +112,4 @@ export const DialogFooter = React.forwardRef<
 });
 
 export const DialogRoot = ChakraDialog.Root;
-export const DialogBackdrop = ChakraDialog.Backdrop;
-export const DialogDescription = ChakraDialog.Description;
-export const DialogTrigger = ChakraDialog.Trigger;
 export const DialogActionTrigger = ChakraDialog.ActionTrigger;
