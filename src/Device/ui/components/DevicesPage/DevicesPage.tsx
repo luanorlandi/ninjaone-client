@@ -47,7 +47,7 @@ export const DevicesPage = () => {
   return (
     <>
       <NavBar />
-      <Box p={6}>
+      <Box as="main" p={6}>
         <HStack mb={6}>
           <Heading as="h1" size="xl" fontWeight="medium">
             Devices

@@ -44,9 +44,9 @@ export const DeviceListItem = ({
       px={3}
       py={2}
       borderBottomWidth="1px"
-      borderBottomColor="{colors.blue.300}"
+      borderBottomColor="{colors.borderSecondary}"
       _hover={{
-        backgroundColor: "#F4F4F5",
+        backgroundColor: { base: "#F4F4F5", _dark: "#1e2022" },
         "& [data-scope=menu]": {
           opacity: 100,
         },
@@ -60,13 +60,13 @@ export const DeviceListItem = ({
               <Highlight
                 ignoreCase
                 query={systemNameHighlightQuery}
-                styles={{ backgroundColor: "{colors.orange.400}" }}
+                styles={{ backgroundColor: "{colors.textHighlight}" }}
               >
                 {device.system_name}
               </Highlight>
             </Text>
           </Box>
-          <Box color="{colors.blue.100}">
+          <Box color="{colors.textSecondary}">
             <Text as="span" textTransform="capitalize">
               {device.type.toLowerCase()}{" "}
               <Text as="span" textTransform="lowercase">
@@ -84,7 +84,7 @@ export const DeviceListItem = ({
             _focusVisible={{ opacity: 100 }}
             _expanded={{ opacity: 100 }}
           >
-            <Button visual="ghost" px="0px" py="2px">
+            <Button visual="ghost" px="0px" py="2px" aria-label="Options menu">
               <IconMenu boxSize="14px" />
             </Button>
           </MenuTrigger>

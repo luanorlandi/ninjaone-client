@@ -6,10 +6,12 @@ export {
   IconClose,
   IconLinux,
   IconMenu,
+  IconMoon,
   IconNinjaOne,
   IconPlusSign,
   IconRefresh,
   IconSearch,
+  IconSun,
   IconWindows,
 } from "./Icons";
 

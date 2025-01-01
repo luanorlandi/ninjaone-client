@@ -35,7 +35,7 @@ export const DevicesList = ({
       <Text fontWeight="medium" px={3} py={2}>
         Device
       </Text>
-      <Box as="hr" borderColor="#CBCFD3"></Box>
+      <Box as="hr" borderColor="{colors.borderPrimary}"></Box>
       {devices.length === 0 && (
         <Center py={4}>
           <Box>No results</Box>

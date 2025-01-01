@@ -1,5 +1,4 @@
 import { DevicesPage } from "@/Device/ui/components";
-
 import { QueryProvider } from "@/core/infra";
 import { ChakraProvider } from "@/core/ui/components";
 import { Toaster } from "@/shared/ui/components";
