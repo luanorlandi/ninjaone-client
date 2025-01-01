@@ -1,11 +1,5 @@
-import {
-  AbsoluteCenter,
-  Menu as ChakraMenu,
-  MenuItemProps,
-  Portal,
-} from "@chakra-ui/react";
+import { Menu as ChakraMenu, MenuItemProps, Portal } from "@chakra-ui/react";
 import * as React from "react";
-import { LuCheck, LuChevronRight } from "react-icons/lu";
 
 interface MenuContentProps extends ChakraMenu.ContentProps {
   portalled?: boolean;
@@ -36,37 +30,6 @@ export const MenuArrow = React.forwardRef<
   );
 });
 
-export const MenuCheckboxItem = React.forwardRef<
-  HTMLDivElement,
-  ChakraMenu.CheckboxItemProps
->(function MenuCheckboxItem(props, ref) {
-  return (
-    <ChakraMenu.CheckboxItem ref={ref} {...props}>
-      <ChakraMenu.ItemIndicator hidden={false}>
-        <LuCheck />
-      </ChakraMenu.ItemIndicator>
-      {props.children}
-    </ChakraMenu.CheckboxItem>
-  );
-});
-
-export const MenuRadioItem = React.forwardRef<
-  HTMLDivElement,
-  ChakraMenu.RadioItemProps
->(function MenuRadioItem(props, ref) {
-  const { children, ...rest } = props;
-  return (
-    <ChakraMenu.RadioItem ps="8" ref={ref} {...rest}>
-      <AbsoluteCenter axis="horizontal" left="4" asChild>
-        <ChakraMenu.ItemIndicator>
-          <LuCheck />
-        </ChakraMenu.ItemIndicator>
-      </AbsoluteCenter>
-      <ChakraMenu.ItemText>{children}</ChakraMenu.ItemText>
-    </ChakraMenu.RadioItem>
-  );
-});
-
 export const MenuItemGroup = React.forwardRef<
   HTMLDivElement,
   ChakraMenu.ItemGroupProps
@@ -84,31 +47,12 @@ export const MenuItemGroup = React.forwardRef<
   );
 });
 
-export interface MenuTriggerItemProps extends ChakraMenu.ItemProps {
-  startIcon?: React.ReactNode;
-}
-
-export const MenuTriggerItem = React.forwardRef<
-  HTMLDivElement,
-  MenuTriggerItemProps
->(function MenuTriggerItem(props, ref) {
-  const { startIcon, children, ...rest } = props;
-  return (
-    <ChakraMenu.TriggerItem ref={ref} {...rest}>
-      {startIcon}
-      {children}
-      <LuChevronRight />
-    </ChakraMenu.TriggerItem>
-  );
-});
-
 export const MenuItem = React.forwardRef<HTMLDivElement, MenuItemProps>(
   function MenuItem(props, ref) {
     return <ChakraMenu.Item ref={ref} {...props} cursor="pointer" />;
   }
 );
 
-export const MenuRadioItemGroup = ChakraMenu.RadioItemGroup;
 export const MenuContextTrigger = ChakraMenu.ContextTrigger;
 export const MenuRoot = ChakraMenu.Root;
 export const MenuSeparator = ChakraMenu.Separator;

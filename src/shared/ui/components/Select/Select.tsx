@@ -2,7 +2,7 @@ import * as React from "react";
 import type { CollectionItem } from "@chakra-ui/react";
 import { Select as ChakraSelect, Portal } from "@chakra-ui/react";
 
-import { CloseButton } from "./close-button";
+import { IconClose } from "@/shared/ui/components";
 
 interface SelectTriggerProps extends ChakraSelect.ControlProps {
   clearable?: boolean;
@@ -30,12 +30,12 @@ const SelectClearTrigger = React.forwardRef<
 >(function SelectClearTrigger(props, ref) {
   return (
     <ChakraSelect.ClearTrigger asChild {...props} ref={ref}>
-      <CloseButton
-        size="xs"
-        variant="plain"
+      <IconClose
+        boxSize="10px"
         focusVisibleRing="inside"
         focusRingWidth="2px"
         pointerEvents="auto"
+        cursor="pointer"
       />
     </ChakraSelect.ClearTrigger>
   );

@@ -18,11 +18,7 @@ export {
 export {
   MenuContent,
   MenuArrow,
-  MenuCheckboxItem,
-  MenuRadioItem,
   MenuItemGroup,
-  MenuTriggerItem,
-  MenuRadioItemGroup,
   MenuContextTrigger,
   MenuRoot,
   MenuSeparator,
@@ -30,7 +26,6 @@ export {
   MenuItemText,
   MenuTrigger,
 } from "./Menu/Menu";
-export type { MenuTriggerItemProps } from "./Menu/Menu";
 
 export {
   DialogContent,
