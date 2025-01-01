@@ -33,10 +33,10 @@ export const DevicesPage = () => {
     refetch,
   } = useListDevice();
   const {
-    systemName,
-    setSystemName,
-    deviceTypes,
-    setDeviceTypes,
+    systemNameFilter,
+    setSystemNameFilter,
+    deviceTypesFilter,
+    setDeviceTypesFilter,
     devicesFiltered,
   } = useDeviceListFilter(data);
   const { sortValue, setSortValue, devicesSorted } =
@@ -60,10 +60,10 @@ export const DevicesPage = () => {
         </HStack>
         <HStack pb={2}>
           <DeviceListFilters
-            systemName={systemName}
-            setSystemName={setSystemName}
-            deviceTypes={deviceTypes}
-            setDeviceTypes={setDeviceTypes}
+            systemName={systemNameFilter}
+            setSystemName={setSystemNameFilter}
+            deviceTypes={deviceTypesFilter}
+            setDeviceTypes={setDeviceTypesFilter}
           />
           <DeviceListSort sortValue={sortValue} setSortValue={setSortValue} />
           <Spacer />
@@ -84,7 +84,10 @@ export const DevicesPage = () => {
           </Center>
         )}
         {!isLoadingDeviceList && !isError && (
-          <DevicesList devices={devicesSorted} />
+          <DevicesList
+            devices={devicesSorted}
+            systemNameHighlightQuery={systemNameFilter}
+          />
         )}
         <DeviceAddDialog
           isOpen={isCreateDialogOpen}

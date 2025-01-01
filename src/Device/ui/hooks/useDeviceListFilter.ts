@@ -3,8 +3,8 @@ import { useMemo, useState } from "react";
 import { Device, DeviceType } from "@/Device/domain";
 
 export const useDeviceListFilter = (devices: Device[]) => {
-  const [systemName, setSystemName] = useState("");
-  const [deviceTypes, setDeviceTypes] = useState<DeviceType[]>([
+  const [systemNameFilter, setSystemNameFilter] = useState("");
+  const [deviceTypesFilter, setDeviceTypesFilter] = useState<DeviceType[]>([
     "WINDOWS",
     "LINUX",
     "MAC",
@@ -13,19 +13,23 @@ export const useDeviceListFilter = (devices: Device[]) => {
   const devicesFiltered = useMemo(() => {
     return devices.filter((device) => {
       const systemNameMatch = device.system_name
-        ? device.system_name.toLowerCase().includes(systemName.toLowerCase())
+        ? device.system_name
+            .toLowerCase()
+            .includes(systemNameFilter.toLowerCase())
         : false;
       const deviceTypeMatch =
-        deviceTypes.length > 0 ? deviceTypes.includes(device.type) : true;
+        deviceTypesFilter.length > 0
+          ? deviceTypesFilter.includes(device.type)
+          : true;
       return systemNameMatch && deviceTypeMatch;
     });
-  }, [devices, systemName, deviceTypes]);
+  }, [devices, systemNameFilter, deviceTypesFilter]);
 
   return {
-    systemName,
-    setSystemName,
-    deviceTypes,
-    setDeviceTypes,
+    systemNameFilter,
+    setSystemNameFilter,
+    deviceTypesFilter,
+    setDeviceTypesFilter,
     devicesFiltered,
   };
 };

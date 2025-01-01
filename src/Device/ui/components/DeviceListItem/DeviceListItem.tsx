@@ -1,4 +1,4 @@
-import { Box, HStack, Spacer, Text } from "@chakra-ui/react";
+import { Box, HStack, Spacer, Text, Highlight } from "@chakra-ui/react";
 
 import {
   IconApple,
@@ -30,12 +30,14 @@ type DeviceListItemProps = {
   device: Device;
   onEdit: () => void;
   onDelete: () => void;
+  systemNameHighlightQuery?: string;
 };
 
 export const DeviceListItem = ({
   device,
   onEdit,
   onDelete,
+  systemNameHighlightQuery = "",
 }: DeviceListItemProps) => {
   return (
     <Box
@@ -54,7 +56,15 @@ export const DeviceListItem = ({
         <Box>
           <Box gap={1} display="flex" alignItems="center">
             {getLogo(device.type)}
-            {device.system_name}
+            <Text>
+              <Highlight
+                ignoreCase
+                query={systemNameHighlightQuery}
+                styles={{ backgroundColor: "{colors.orange.400}" }}
+              >
+                {device.system_name}
+              </Highlight>
+            </Text>
           </Box>
           <Box color="{colors.blue.100}">
             <Text as="span" textTransform="capitalize">

@@ -34,6 +34,9 @@ const customConfig = defineConfig({
           400: { value: "#D53948" },
           500: { value: "#C82B3A" },
         },
+        orange: {
+          400: { value: "#FFA500" },
+        },
       },
     },
     semanticTokens: {
