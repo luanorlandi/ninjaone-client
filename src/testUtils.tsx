@@ -1,17 +1,16 @@
 import React, { ReactElement } from "react";
 import { render, RenderOptions } from "@testing-library/react";
 
-import { QueryProvider } from "@/core/infra/QueryProvider";
-import { Provider } from "@/core/ui/components/ChakraProvider/ChakraProvider";
-import { Toaster } from "@/shared/ui/components";
+import { QueryProvider, ChakraProvider } from "@/core/application/components";
+import { Toaster } from "@/shared/application/components";
 
 const AllTheProviders = ({ children }: { children: React.ReactNode }) => {
   return (
     <QueryProvider>
-      <Provider>
+      <ChakraProvider>
         {children}
         <Toaster />
-      </Provider>
+      </ChakraProvider>
     </QueryProvider>
   );
 };

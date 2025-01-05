@@ -2,7 +2,7 @@ import "@testing-library/jest-dom";
 
 import { server } from "./mocks/server";
 
-jest.mock("@/core/infra/constants", () => ({
+jest.mock("@/core/infrastructure/constants", () => ({
   BASE_URL: "",
 }));
 
