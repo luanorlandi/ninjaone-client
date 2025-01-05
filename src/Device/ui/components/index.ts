@@ -1,7 +1,7 @@
 export { DevicesPage } from "./DevicesPage/DevicesPage";
-export { DevicesList } from "./DevicesList/DevicesList";
+export { DeviceList } from "./DeviceList/DeviceList";
 export { DeviceListItem } from "./DeviceListItem/DeviceListItem";
-export { DeviceAddDialog } from "./DeviceAddDialog/DeviceAddDialog";
+export { DeviceCreateDialog } from "./DeviceCreateDialog/DeviceCreateDialog";
 export { DeviceEditDialog } from "./DeviceEditDialog/DeviceEditDialog";
 export { DeviceDeleteDialog } from "./DeviceDeleteDialog/DeviceDeleteDialog";
 export { DeviceListFilters } from "./DeviceListFilters/DeviceListFilters";

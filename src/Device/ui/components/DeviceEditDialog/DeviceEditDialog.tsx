@@ -45,12 +45,16 @@ export const DeviceEditDialog = ({
 }: DeviceEditDialogProps) => {
   const { mutate, isPending } = useEditDevice({
     onSuccess: () => {
-      toaster.success({ title: `Device "${device.system_name}" edited` });
+      toaster.success({
+        title: `Device "${form.getFieldValue("system_name")}" edited`,
+      });
       onToggle();
     },
     onError: () => {
       toaster.error({
-        title: `Failed to edit device "${device.system_name}". Try again later`,
+        title: `Failed to edit device "${form.getFieldValue(
+          "system_name"
+        )}". Try again later`,
       });
     },
   });
@@ -111,6 +115,7 @@ export const DeviceEditDialog = ({
                       errorText={field.state.meta.errors?.join(",")}
                     >
                       <Input
+                        aria-label="System name"
                         value={field.state.value}
                         onBlur={field.handleBlur}
                         onChange={(event) =>
@@ -184,6 +189,7 @@ export const DeviceEditDialog = ({
                       errorText={field.state.meta.errors?.join(",")}
                     >
                       <Input
+                        aria-label="HDD capacity (GB)"
                         value={field.state.value}
                         onBlur={field.handleBlur}
                         onChange={(e) => field.handleChange(e.target.value)}

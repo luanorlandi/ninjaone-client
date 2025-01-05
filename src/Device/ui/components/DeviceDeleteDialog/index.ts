@@ -1,1 +1,0 @@
-export { DeviceDeleteDialog } from "./DeviceDeleteDialog";

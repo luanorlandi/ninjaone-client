@@ -66,7 +66,13 @@ export const SelectItem = React.forwardRef<
 >(function SelectItem(props, ref) {
   const { item, children, ...rest } = props;
   return (
-    <ChakraSelect.Item key={item.value} item={item} {...rest} ref={ref}>
+    <ChakraSelect.Item
+      key={item.value}
+      item={item}
+      {...rest}
+      ref={ref}
+      pointerEvents="auto"
+    >
       {children}
       <ChakraSelect.ItemIndicator />
     </ChakraSelect.Item>
@@ -148,6 +154,7 @@ export const SelectRoot = React.forwardRef<
       {...props}
       ref={ref}
       positioning={{ sameWidth: true, ...props.positioning }}
+      scrollToIndexFn={() => {}}
     >
       {props.asChild ? (
         props.children

@@ -31,12 +31,15 @@ const devices = createListCollection<{ label: string; value: DeviceType }>({
   ],
 });
 
-type DeviceAddDialogProps = {
+type DeviceCreateDialogProps = {
   isOpen: boolean;
   onToggle: () => void;
 };
 
-export const DeviceAddDialog = ({ isOpen, onToggle }: DeviceAddDialogProps) => {
+export const DeviceCreateDialog = ({
+  isOpen,
+  onToggle,
+}: DeviceCreateDialogProps) => {
   const { mutate, isPending } = useCreateDevice({
     onSuccess: () => {
       toaster.success({
@@ -98,6 +101,7 @@ export const DeviceAddDialog = ({ isOpen, onToggle }: DeviceAddDialogProps) => {
                       errorText={field.state.meta.errors?.join(",")}
                     >
                       <Input
+                        aria-label="System name"
                         value={field.state.value}
                         onBlur={field.handleBlur}
                         onChange={(event) =>
@@ -171,6 +175,7 @@ export const DeviceAddDialog = ({ isOpen, onToggle }: DeviceAddDialogProps) => {
                       errorText={field.state.meta.errors?.join(",")}
                     >
                       <Input
+                        aria-label="HDD capacity (GB)"
                         value={field.state.value}
                         onBlur={field.handleBlur}
                         onChange={(e) => field.handleChange(e.target.value)}

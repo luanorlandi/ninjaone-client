@@ -52,11 +52,11 @@ export const DeviceListItem = ({
         },
       }}
     >
-      <HStack>
+      <HStack role="row">
         <Box>
           <Box gap={1} display="flex" alignItems="center">
             {getLogo(device.type)}
-            <Text>
+            <Text role="cell">
               <Highlight
                 ignoreCase
                 query={systemNameHighlightQuery}
@@ -66,8 +66,8 @@ export const DeviceListItem = ({
               </Highlight>
             </Text>
           </Box>
-          <Box color="{colors.textSecondary}">
-            <Text as="span" textTransform="capitalize">
+          <Box color="{colors.textSecondary}" role="cell">
+            <Text as="span" textTransform="capitalize" role="">
               {device.type.toLowerCase()}{" "}
               <Text as="span" textTransform="lowercase">
                 workstation

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { HStack, Input, createListCollection } from "@chakra-ui/react";
 
 import {
@@ -25,14 +24,12 @@ const devicesCollection = createListCollection<{
 });
 
 type DeviceListFiltersProps = {
-  systemName: string;
   setSystemName: (systemName: string) => void;
   deviceTypes: DeviceType[];
   setDeviceTypes: (deviceTypes: DeviceType[]) => void;
 };
 
 export const DeviceListFilters = ({
-  systemName,
   setSystemName,
   deviceTypes,
   setDeviceTypes,

@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   Box,
   Heading,
@@ -17,8 +16,8 @@ import {
   ToggleTip,
 } from "@/shared/ui/components";
 import {
-  DevicesList,
-  DeviceAddDialog,
+  DeviceList,
+  DeviceCreateDialog,
   DeviceListFilters,
   DeviceListSort,
 } from "@/Device/ui/components";
@@ -65,7 +64,6 @@ export const DevicesPage = () => {
           lg={{ flexDirection: "row" }}
         >
           <DeviceListFilters
-            systemName={systemNameFilter}
             setSystemName={setSystemNameFilter}
             deviceTypes={deviceTypesFilter}
             setDeviceTypes={setDeviceTypesFilter}
@@ -73,14 +71,22 @@ export const DevicesPage = () => {
           <DeviceListSort sortValue={sortValue} setSortValue={setSortValue} />
           <Spacer />
           <ToggleTip content="Results refreshed!">
-            <Button visual="ghost" onClick={() => refetch()}>
+            <Button
+              visual="ghost"
+              onClick={() => refetch()}
+              aria-label="Refresh results"
+            >
               <IconRefresh boxSize="14px" />
             </Button>
           </ToggleTip>
         </HStack>
         {isLoadingDeviceList && !isError && (
           <Center>
-            <Spinner color="{colors.blue.400}" size="xl" />
+            <Spinner
+              color="{colors.blue.400}"
+              size="xl"
+              data-testid="loading-list"
+            />
           </Center>
         )}
         {!isLoadingDeviceList && isError && (
@@ -89,12 +95,12 @@ export const DevicesPage = () => {
           </Center>
         )}
         {!isLoadingDeviceList && !isError && (
-          <DevicesList
+          <DeviceList
             devices={devicesSorted}
             systemNameHighlightQuery={systemNameFilter}
           />
         )}
-        <DeviceAddDialog
+        <DeviceCreateDialog
           isOpen={isCreateDialogOpen}
           onToggle={toggleCreateDialog}
         />

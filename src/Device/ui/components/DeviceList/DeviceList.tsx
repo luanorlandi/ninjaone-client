@@ -8,7 +8,7 @@ import {
 } from "@/Device/ui/components";
 import type { Device } from "@/Device/domain";
 
-type DevicesListProps = {
+type DeviceListProps = {
   devices: Device[];
   systemNameHighlightQuery?: string;
 };
@@ -20,10 +20,10 @@ const EMPTY_DEVICE: Device = {
   hdd_capacity: "",
 };
 
-export const DevicesList = ({
+export const DeviceList = ({
   devices,
   systemNameHighlightQuery,
-}: DevicesListProps) => {
+}: DeviceListProps) => {
   const [deviceSelected, setDeviceSelected] = useState<Device>(EMPTY_DEVICE);
   const { open: isDeleteDialogOpen, onToggle: toggleDeleteDialog } =
     useDisclosure();
