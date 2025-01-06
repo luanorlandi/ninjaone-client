@@ -52,7 +52,7 @@ export const DeviceListFilters = ({
           onChange={(event) => {
             setSystemNameDebounced(event.target.value);
           }}
-          minWidth="270px"
+          lg={{ minWidth: "270px" }}
         />
       </InputGroup>
       <SelectRoot
@@ -62,7 +62,7 @@ export const DeviceListFilters = ({
         onValueChange={(values) => {
           setDeviceTypes(values.value as DeviceType[]);
         }}
-        minWidth="270px"
+        lg={{ minWidth: "270px" }}
       >
         <SelectTrigger>
           <SelectMultipleValueText placeholder="Device type" />

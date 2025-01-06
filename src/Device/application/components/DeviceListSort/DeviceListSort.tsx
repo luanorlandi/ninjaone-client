@@ -88,7 +88,7 @@ export const DeviceListSort = ({
         onValueChange={(values) => {
           setSortValue(values.value[0] as DeviceSortValue);
         }}
-        minWidth="330px"
+        lg={{ minWidth: "330px" }}
       >
         <SelectTrigger clearable>
           <SelectValueText placeholder="Sort by" />

@@ -54,6 +54,7 @@ export const DeviceDeleteDialog = ({
             visual="danger"
             loading={isPending}
             onClick={() => mutate(device.id)}
+            loadingText="Delete"
           >
             Delete
           </Button>

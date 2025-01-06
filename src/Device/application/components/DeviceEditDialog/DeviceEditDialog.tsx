@@ -204,7 +204,7 @@ export const DeviceEditDialog = ({
             <DialogActionTrigger asChild>
               <Button visual="outline">Cancel</Button>
             </DialogActionTrigger>
-            <Button type="submit" loading={isPending}>
+            <Button type="submit" loading={isPending} loadingText="Submit">
               Submit
             </Button>
           </DialogFooter>
